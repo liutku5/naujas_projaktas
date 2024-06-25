@@ -1,4 +1,5 @@
 package org.example;
+
 import java.util.regex.Matcher;
 
 import java.util.regex.Pattern;
@@ -6,7 +7,7 @@ import java.util.regex.Pattern;
 public class Function {
 
 
-    public String nameCase(String name) {
+    public static String nameCase(String name) {
 
         String[] words = name.split(" ");
         StringBuilder wordCorrection = new StringBuilder();
@@ -25,7 +26,7 @@ public class Function {
         return wordCorrection.toString().trim();
     }
 
-    public String phoneNo(String phoNo) {
+    public static String phoneNo(String phoNo) {
         String phoneFormat = phoNo.replaceAll("[^0-9]", "");
 
         if (phoneFormat.startsWith("370")) {
@@ -41,9 +42,12 @@ public class Function {
         return phoneFormat;
     }
 
-    public boolean emailCheck(String email) {
+    public static boolean emailCheck(String email) {
         String regex = "^[\\w!#$%&amp;'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&amp;'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
         Pattern pattern = Pattern.compile(regex);
+        if (email == null) {
+            return false;
+        }
         Matcher match = pattern.matcher(email);
         return match.matches();
     }
