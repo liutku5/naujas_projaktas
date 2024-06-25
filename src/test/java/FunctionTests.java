@@ -32,7 +32,7 @@ public class FunctionTests {
     public void nameCaseWithSymbolTest() {
         String name = "vytautas pet!ras";
         String actual = Function.nameCase(name);
-        String expected = "Vytautas Petras";
+        String expected = "Invalid name";
         Assert.assertEquals(actual, expected);
     }
 
@@ -80,7 +80,7 @@ public class FunctionTests {
     public void phoneNumberWithLestNumbersTest() {
         String phone = "5678";
         String actual = Function.phoneNo(phone);
-        String expected = "12345678";
+        String expected = "Invalid phone number";
         Assert.assertEquals(actual, expected);
     }
 
@@ -88,7 +88,7 @@ public class FunctionTests {
     public void phoneNumberEmptyTest() {
         String phone = "";
         String actual = Function.phoneNo(phone);
-        String expected = "";
+        String expected = "Invalid phone number";
         Assert.assertEquals(actual, expected);
     }
 
@@ -98,9 +98,17 @@ public class FunctionTests {
         boolean isValid = Function.emailCheck(email);
         Assert.assertTrue(isValid);
     }
+
     @Test
     public void emailWithTwoDomainTest() {
         String email = "betkas@domain.kitas.com";
+        boolean isValid = Function.emailCheck(email);
+        Assert.assertTrue(isValid);
+    }
+
+    @Test
+    public void emailWithSymbolsTest() {
+        String email = "betkas2!@domain.com";
         boolean isValid = Function.emailCheck(email);
         Assert.assertTrue(isValid);
     }
@@ -113,7 +121,7 @@ public class FunctionTests {
     }
 
     @Test
-    public void emailWithTwoTest() {// symbol @@
+    public void emailWithTwoEtaSymbolsTest() {// symbol @@
         String email = "betkas@@domain.com";
         boolean isValid = Function.emailCheck(email);
         Assert.assertFalse(isValid);
@@ -137,7 +145,7 @@ public class FunctionTests {
     }
 
     @Test
-    public void emailWithOutTest() {// symbol @
+    public void emailWithOutEtaSymbolTest() {// symbol @
         String email = "betkasdomain.com";
         boolean isValid = Function.emailCheck(email);
         Assert.assertFalse(isValid);
@@ -159,20 +167,15 @@ public class FunctionTests {
 
     @Test
     public void emailWithSymbolTest() {
-        String email = "betk2!>as@domain.com";
+        String email = "betk>as@domain.com";
         boolean isValid = Function.emailCheck(email);
         Assert.assertFalse(isValid);
     }
+
     @Test
     public void emailWithSymbolInDomainTest() {
         String email = "betkas@dom%0ain.com";
         boolean isValid = Function.emailCheck(email);
         Assert.assertFalse(isValid);
     }
-//    @Test
-//    public void emailWithSymbolInDomainTest() {
-//        String email = "betkas@domain.com";
-//        boolean isValid = Function.emailCheck(email);
-//        Assert.assertFalse(isValid);
-//    }
 }

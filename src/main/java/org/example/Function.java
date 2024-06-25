@@ -9,8 +9,12 @@ public class Function {
 
     public static String nameCase(String name) {
 
+
         String[] words = name.split(" ");
         StringBuilder wordCorrection = new StringBuilder();
+
+        if (name.matches(".*[@!@>&%].*"))
+            return "Invalid name";
 
         for (String word : words) {
             if (word.length() > 0) {
@@ -19,7 +23,6 @@ public class Function {
                 wordCorrection.append(" ");
             }
         }
-
         if (name == null || name.isEmpty()) {
             return name;
         }
@@ -28,6 +31,9 @@ public class Function {
 
     public static String phoneNo(String phoNo) {
         String phoneFormat = phoNo.replaceAll("[^0-9]", "");
+        if (phoneFormat.length() < 8) {
+            return "Invalid phone number";
+        }
 
         if (phoneFormat.startsWith("370")) {
             phoneFormat = phoneFormat.substring(3);
@@ -36,9 +42,9 @@ public class Function {
         } else if (phoneFormat.startsWith("8")) {
             phoneFormat = phoneFormat.substring(1);
         }
-        if (phoNo == null || phoNo.isEmpty()) {
-            return phoNo;
-        }
+//        if (phoNo == null || phoNo.isEmpty()) {
+//            return phoNo;
+//        }
         return phoneFormat;
     }
 
